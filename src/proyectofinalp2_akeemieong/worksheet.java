@@ -4,10 +4,15 @@
  */
 package proyectofinalp2_akeemieong;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SURFACEB2I7
  */
 public class worksheet {
+    ArrayList<DefaultTableModel> sheets=new ArrayList<>();
+    
     
 }
