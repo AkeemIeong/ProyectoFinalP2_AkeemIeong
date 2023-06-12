@@ -6,13 +6,46 @@ package proyectofinalp2_akeemieong;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author SURFACEB2I7
  */
 public class worksheet {
-    ArrayList<DefaultTableModel> sheets=new ArrayList<>();
+    private TableModel modelo;
+    private String nombre;
+
+    public worksheet() {
+    }
+
+    public worksheet(TableModel modelo, String nombre) {
+        this.modelo = modelo;
+        this.nombre = nombre;
+    }
+
+    public TableModel getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(TableModel modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "worksheet{" + "modelo=" + modelo + ", nombre=" + nombre + '}';
+    }
+    
+    
     
     
 }
