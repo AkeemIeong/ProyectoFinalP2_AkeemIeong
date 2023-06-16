@@ -96,6 +96,7 @@ public class Main extends javax.swing.JFrame {
         table=new TableRowSorter(jTable1.getModel());
         
         jTable2.setRowSorter(table);
+        new PegarExcel(jTable1);
         saveThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -592,7 +593,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_copyActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
