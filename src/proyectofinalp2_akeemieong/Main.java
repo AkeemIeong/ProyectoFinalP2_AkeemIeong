@@ -62,12 +62,17 @@ rride
  */
 package proyectofinalp2_akeemieong;
 
+import java.awt.List;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -79,6 +84,13 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.DefaultXYDataset;
 
 /**
  *
@@ -100,7 +112,7 @@ public class Main extends javax.swing.JFrame {
         saveThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("Started saveThread");
+                    //System.out.println("Started saveThread");
                     while(true) {
                         saveTable();
                     }
@@ -128,9 +140,14 @@ public class Main extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton10 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
@@ -142,8 +159,11 @@ public class Main extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jButton9 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jPanel2 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jToolBar3 = new javax.swing.JToolBar();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -282,11 +302,24 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToolBar1.setBackground(new java.awt.Color(204, 204, 204));
-        jToolBar1.setRollover(true);
+        jTabbedPane1.setBackground(new java.awt.Color(0, 153, 102));
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        jToolBar2.setBackground(new java.awt.Color(204, 204, 204));
+        jToolBar2.setRollover(true);
+
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinalp2_akeemieong/guardar.png"))); // NOI18N
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton10);
 
         jButton1.setText("Exportar como CSV");
-        jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +327,45 @@ public class Main extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar2.add(jButton1);
+
+        jButton11.setText("Cargar archivo");
+        jButton11.setFocusable(false);
+        jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton11);
+
+        jButton12.setText("Cargar CSV");
+        jButton12.setFocusable(false);
+        jButton12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton12);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("File", jPanel2);
+
+        jToolBar1.setBackground(new java.awt.Color(204, 204, 204));
+        jToolBar1.setRollover(true);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,35 +440,54 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Home", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jToolBar3.setBackground(new java.awt.Color(204, 204, 204));
+        jToolBar3.setRollover(true);
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinalp2_akeemieong/guardar.png"))); // NOI18N
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinalp2_akeemieong/Barra.png"))); // NOI18N
+        jButton14.setFocusable(false);
+        jButton14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton14.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButton14ActionPerformed(evt);
             }
         });
+        jToolBar3.add(jButton14);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton10)
-                .addContainerGap(949, Short.MAX_VALUE))
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinalp2_akeemieong/pastel.png"))); // NOI18N
+        jButton15.setFocusable(false);
+        jButton15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(jButton15);
+
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinalp2_akeemieong/lineal.png"))); // NOI18N
+        jButton13.setFocusable(false);
+        jButton13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton13.setPreferredSize(new java.awt.Dimension(90, 76));
+        jButton13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar3.add(jButton13);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Insert", jPanel4);
+
+        jTabbedPane1.setSelectedIndex(1);
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(100, 100));
 
@@ -526,8 +616,8 @@ public class Main extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         key=(String)jComboBox1.getSelectedItem();
-        System.out.println(key);
-        System.out.println("Updated key in JCB1AP");
+//        System.out.println(key);
+//        System.out.println("Updated key in JCB1AP");
         if(sheets.containsKey(jComboBox1.getSelectedItem())){
             Object[][] temp=new Object[jTable1.getRowCount()][jTable1.getColumnCount()];
             temp=sheets.get((String)jComboBox1.getSelectedItem());
@@ -561,17 +651,21 @@ public class Main extends javax.swing.JFrame {
                 }
                 fw = new FileWriter(fichero);
                 bw = new BufferedWriter(fw);
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-                    for (int j = 0; j < jTable1.getColumnCount(); j++) {
-                        if(j==0&&i>0){
-                            bw.write("\n");
+                for (int h= 0; h < sheets.size(); h++) {
+                    String current=jComboBox1.getItemAt(h);
+                    bw.write(current+".");
+                    for (int i = 0; i < jTable1.getRowCount(); i++) {
+                        for (int j = 0; j < jTable1.getColumnCount(); j++) {
+                            if(j==25){
+                                bw.write(sheets.get(current)[i][j]+"\n");
+                                //bw.write("\n");
+                            }else
+                            bw.write(sheets.get(current)[i][j]+",");
                         }
-
-                        bw.write((String)jTable1.getValueAt(i,j)+",");
                     }
-
+                    bw.write(";");
+                    bw.write("\n");
                 }
-
                 bw.flush();
                 JOptionPane.showMessageDialog(this,"Archivo guardado exitosamente");
 
@@ -618,13 +712,104 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        
+        adminHashmap binario=new adminHashmap("./sheets.cbt");
+        binario.cargararchivo();
+        binario.setSheets(sheets);
+        binario.escribirArchivo();
+        JOptionPane.showMessageDialog(this,"Archivo exitosamente");
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+            adminHashmap ap = new adminHashmap("./sheets.cbt");
+            ap.cargararchivo();
+            DefaultComboBoxModel modelo=new DefaultComboBoxModel();
+            ArrayList nom=new ArrayList(ap.getSheets().keySet());
+            for (Object o : nom) {
+                modelo.addElement(o);
+                sheets.put(o.toString(), (Object[][])ap.getSheets().get(o));
+            }
+            jComboBox1.setModel(modelo);
+            jTable1.setVisible(true);
+            jComboBox1ActionPerformed(evt);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto", "txt");
+        jfc.addChoosableFileFilter(filtro);
+        int seleccion = jfc.showSaveDialog(this);
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+         if (seleccion == JFileChooser.APPROVE_OPTION) {
+             try{
+                InputStream ins= new FileInputStream("");
+                Scanner lea = new Scanner(ins);
+                while(lea.hasNextLine()){
+                    String d1=lea.nextLine();
+                    String []d2=d1.split(".");
+                    String d3=d2[0];
+//                    for (int i = 0; i <; i++) {
+//                           
+//                    }
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+         }
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        int []rowssele=jTable1.getSelectedRows();
+        int []colsele=jTable1.getSelectedColumns();
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for (int col: colsele) {
+                String category = jTable1.getValueAt(rowssele[0], col).toString();
+                for (int i :rowssele) {
+                    
+                    if(i+1<rowssele[rowssele.length-1]){
+                        Integer xValue = Integer.parseInt(jTable1.getValueAt(i+1, col).toString());
+                        String nomb =JOptionPane.showInputDialog(this, "Ingrese el nombre del dato en la pocicion "+"["+(i+2)+"]["+(col+1)+"]");
+                        dataset.addValue(xValue, nomb, category);
+                    }
+                    if(i+1==rowssele[rowssele.length-1]){
+                        Integer xValue= Integer.parseInt(jTable1.getValueAt(i+1, col).toString());
+                        String nomb =JOptionPane.showInputDialog(this, "Ingrese el nombre del dato en la pocicion "+"["+(i+2)+"]["+(col+1)+"]");
+                        dataset.addValue(xValue, nomb, category);                
+                    }
+                }
+        }
+        JFreeChart chart = ChartFactory.createBarChart3D("3D Bar Graph","Category","Value",dataset
+                ,PlotOrientation.VERTICAL,true,true,false);
+        ChartFrame frame = new ChartFrame("3D Bar Graph", chart);
+        frame.pack();
+        frame.setVisible(true);
+
+        
+
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        int []rowssele=jTable1.getSelectedRows();
+        int []colsele=jTable1.getSelectedColumns();
+        DefaultPieDataset dato=new DefaultPieDataset();
+        for (int col: colsele) {
+                String category = jTable1.getValueAt(rowssele[0], col).toString();
+                    Integer xValue = Integer.parseInt(jTable1.getValueAt(rowssele[0]+1, col).toString());
+                    dato.setValue(category, xValue);               
+
+        }        
+        JFreeChart chart=ChartFactory.createPieChart("Pie Chart Graph",dato,true,true,false );
+        ChartFrame frame = new ChartFrame("Pie Chart Graph", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     public void saveTable() {
         Object [][]ab=new  Object[jTable1.getRowCount()][jTable1.getColumnCount()];
         if (key != null) {
-            System.out.println("Entro");
+            //System.out.println("Entro");
             String prevKey = key;
             JTable copy = jTable1;
             for (int i = 0; i < copy.getRowCount(); i++) {
@@ -634,7 +819,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
             sheets.replace(prevKey, ab);
-            System.out.println("Saved table: " + prevKey);
+            //System.out.println("Saved table: " + prevKey);
         }
         
     }
@@ -686,6 +871,7 @@ public class Main extends javax.swing.JFrame {
     Thread op1;
     String key = null;
     Thread saveThread;
+    
     //guardar save=new guardar(inicio, j);
         //Thread op1=new Thread(save);
     //HashMap<String, TableModel> sheets = new HashMap<>();       
@@ -696,6 +882,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem copy;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -708,6 +899,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -719,6 +911,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JToolBar jToolBar3;
     private javax.swing.JMenuItem paste;
     // End of variables declaration//GEN-END:variables
 }
