@@ -91,6 +91,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -472,6 +474,11 @@ public class Main extends javax.swing.JFrame {
         jButton13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton13.setPreferredSize(new java.awt.Dimension(90, 76));
         jButton13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
         jToolBar3.add(jButton13);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -805,6 +812,28 @@ public class Main extends javax.swing.JFrame {
         frame.pack();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        String nom=JOptionPane.showInputDialog(this,"Ingrese el dato que se compara");
+        int []colsele=jTable1.getSelectedColumns();
+        int ro=jTable1.getSelectedRow();
+        int start=1;
+        XYSeries series=new XYSeries(nom);
+        for (int col: colsele) {
+                int xValue = Integer.parseInt(jTable1.getValueAt(ro, col).toString());
+                series.add(start, xValue);
+                start++;
+        }        
+        XYSeriesCollection dataset=new XYSeriesCollection();
+        dataset.addSeries(series);
+        String xlable=JOptionPane.showInputDialog(this, "Ingrese el nombre del dato en el eje X");
+        String ylable=JOptionPane.showInputDialog(this, "Ingrese el nombre del dato en el eje y");
+        JFreeChart chart=ChartFactory.createXYLineChart("Grafica Lineal", xlable, ylable, dataset, PlotOrientation.VERTICAL
+                , true,false, false);
+        ChartFrame frame = new ChartFrame("Pie Chart Graph", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     public void saveTable() {
         Object [][]ab=new  Object[jTable1.getRowCount()][jTable1.getColumnCount()];
